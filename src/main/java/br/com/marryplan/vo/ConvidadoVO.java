@@ -13,6 +13,8 @@ public class ConvidadoVO implements Serializable{
 	private boolean confirmacaoConvidado;
 	private boolean tipoDeConvite;
 	private boolean ePadrinho;
+	private String descricao;
+	private String descricaoTipo;
 	
 	
 	public boolean isConfirmacaoConvidado() {
@@ -70,7 +72,32 @@ public class ConvidadoVO implements Serializable{
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	public String getDescricao() {
+		String label;
+		if(this.isConfirmacaoConvidado()||this.isePadrinho()){
+			label ="sim";
+		}else{
+			label="Não";
+		}
+		return label;
+	}
+
+	public String getDescricaoTipo() {
+		String label;
+		if(this.isTipoDeConvite()){
+			label ="Digital";
+		}else{
+			label="Em mãos";
+		}
+		return label;
+	}
 	
+	
+	
+
+	
+
 	
 
 }
