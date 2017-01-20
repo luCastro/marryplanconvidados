@@ -6,9 +6,15 @@ import javax.servlet.ServletContext;
 
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+
+/**
+ * Classes com métodos comuns a todos os controllers.
+ * @author MARCOS
+ *
+ */
 public class AbstractController {
 	
-public void getConfigSpring(){
+	public void getConfigSpring(){
 		
 		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 		ServletContext servletContext = (ServletContext) externalContext.getContext();

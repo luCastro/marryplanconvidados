@@ -1,0 +1,76 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<script name="jquery/jquery.js" library="primefaces"></script>
+	<title>Incluir Tarefa</title>
+</h:head>
+
+<ui:decorate template="/index.xhtml">
+	<ui:define name="centro">
+			<h:form>
+					<p:messages id="messages" showDetail="true" autoUpdate="true"
+							closable="true" />
+			
+			
+			
+				<p:dataTable var="tarefas" value="#{tarefasMbean.listaTarefasVO}"
+					rows="15" paginator="true"
+					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} 
+			                                                 {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					editable="true" style="width:98%;">
+			
+					<p:ajax event="rowEdit" listener="#{tarefasMbean.alterar}" />
+					<p:ajax event="rowEditCancel"
+						listener="#{tarefasMbean.cancelarEdicao}" />
+					<p:column headerText="Id">
+						<h:outputText value="#{tarefas.id}" />
+					</p:column>
+			
+					<p:column headerText="Nome da tarefa">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{tarefas.nome}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText id="inputNome" value="#{tarefas.nome}" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+			
+					<p:column headerText="Status">
+						<p:inputSwitch value="#{tarefas.status}" onLabel="Resolvida" offLabel="Não Resolvida"/>
+					</p:column>
+			
+					<p:column headerText="Excluir">
+			
+						<p:commandButton icon="ui-icon-trash" title="Excluir Registro"
+							ajax="true" actionListener="#{tarefasMbean.excluir(tarefas)}"
+							update="@form" />
+					</p:column>
+			
+					<p:column headerText="Alterar">
+						<p:rowEditor />
+					</p:column>
+			
+				</p:dataTable>
+				<br></br>
+			
+				<p:panelGrid columns="2">
+					<p:outputLabel value="Adicionar Tarefa"></p:outputLabel>
+					<p:inputText value="#{tarefasMbean.tarefas.nome}"></p:inputText>
+			
+			
+				</p:panelGrid>
+			
+				<p:commandButton value="Salvar" action="#{tarefasMbean.salvar}"
+					update="messages" />
+			</h:form>
+
+		</ui:define>
+	</ui:decorate>
+
+</html>

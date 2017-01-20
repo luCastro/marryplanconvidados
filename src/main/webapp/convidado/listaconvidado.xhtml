@@ -1,0 +1,96 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+</h:head>
+		
+		<ui:decorate template="/index.xhtml">
+			<ui:define name="centro">
+				<h:body>
+					<h:form>
+						<p:messages id="messages" showDetail="true" autoUpdate="true"
+							closable="true" />
+		
+						<p:dataTable var="convidado"
+							value="#{convidadoMbean.listaConvidadoVO}" rows="7"
+							paginator="true"
+							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink}
+											{PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							rowsPerPageTemplate="7,14,21" style="width:98%" editable="true">
+		
+							<p:ajax event="rowEdit" listener="#{convidadoMbean.alterar}" />
+							<p:ajax event="rowEditCancel"
+								listener="#{convidadoMbean.cancelarEdicao}" />
+		
+							<p:column headerText="Id">
+								<h:outputText value="#{convidado.id}" />
+							</p:column>
+		
+							<p:column headerText="Nome">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{convidado.nome}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText id="inputNome" value="#{convidado.nome}" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+		
+							<p:column headerText="Telefone">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{convidado.telefone}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputMask id="inputTelefone" value="#{convidado.telefone}"
+											mask="(999)9999-9999" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+		
+							<p:column headerText="Email">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{convidado.email}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText id="inputEmail" value="#{convidado.email}" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+		
+							<p:column headerText="Confirmou Presença?">
+								<h:outputText value="#{convidado.descricao}" />
+							</p:column>
+		
+							<p:column headerText="É padrinho?">
+								<h:outputText value="#{convidadoMbean.convidado.descricao}" />
+							</p:column>
+		
+							<p:column headerText="Tipo de convite?">
+								<h:outputText value="#{convidadoMbean.convidado.descricaoTipo}" />
+							</p:column>
+		
+							<p:column headerText="Excluir">
+		
+								<p:commandButton icon="ui-icon-trash" title="Excluir Registro"
+									ajax="true" actionListener="#{convidadoMbean.excluir(convidado)}"
+									update="@form" />
+							</p:column>
+		
+							<p:column headerText="Alterar">
+								<p:rowEditor />
+							</p:column>
+		
+						</p:dataTable>
+		
+					</h:form>
+				</h:body>
+			</ui:define>
+		</ui:decorate>
+</html>

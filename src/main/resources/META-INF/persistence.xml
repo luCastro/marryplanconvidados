@@ -5,6 +5,8 @@
 	<!-- Will be referenced in Spring Context File -->
 	<persistence-unit name="jpa-persistence" transaction-type="RESOURCE_LOCAL">
 		<class>br.com.marryplan.entidade.Tarefas</class>
+		<class>br.com.marryplan.entidade.Pessoa</class>
+		<class>br.com.marryplan.entidade.Convidado</class>
 		
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/marryplan" />

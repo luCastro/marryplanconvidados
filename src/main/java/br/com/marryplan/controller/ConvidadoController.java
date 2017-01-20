@@ -18,8 +18,8 @@ import br.com.marryplan.vo.ConvidadoVO;
 @SessionScoped
 public class ConvidadoController extends AbstractController {
 	
-	public static String TELA_LISTA_TODOS = "/convidado/listar_todos_convidado.xhtml";
-	public static String TELA_CADASTRAR_CONVIDADO = "/convidado/cadastrar_convidado.xhtml";
+	public static String TELA_LISTA_TODOS = "/convidado/listaconvidado.xhtml";
+	public static String TELA_CADASTRAR_CONVIDADO = "/convidado/cadconvidado.xhtml";
 
 	@Autowired
 	private ConvidadoService convidadoService;
@@ -29,6 +29,7 @@ public class ConvidadoController extends AbstractController {
 	@PostConstruct
 	private void init() {
 		super.getConfigSpring();
+		this.listaConvidadoVO = convidadoService.listarConvidado();
 	}
 	
 	private ConvidadoVO convidado = new ConvidadoVO();
@@ -43,9 +44,9 @@ public class ConvidadoController extends AbstractController {
 	
 	
 	private void limparCampos() {
-		this.getConvidado().getNome();
-		this.getConvidado().getTelefone();
-		this.getConvidado().getEmail();
+		this.getConvidado().setNome(null);
+		this.getConvidado().setTelefone(null);
+		this.getConvidado().setEmail(null);
 	}
 	
 	public String salvar(){
@@ -88,7 +89,7 @@ public class ConvidadoController extends AbstractController {
 		return TELA_LISTA_TODOS;
 	}
 	
-	public String chamarTelaCadastroConvidados(){
+	public String chamarTelaCadastroConvidado(){
 		return TELA_CADASTRAR_CONVIDADO;
 	}
 	

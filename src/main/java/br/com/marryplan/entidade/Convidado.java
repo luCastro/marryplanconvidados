@@ -13,7 +13,7 @@ public class Convidado extends Pessoa {
 	private boolean confirmacaoConvidado;
 	
 	@Column(name="TIPOCONVITE")
-	private boolean tipoDeConvite;
+	private boolean tipoDeConvite = true;
 	
 	@Column(name="PADRINHO")
 	private boolean ePadrinho;
